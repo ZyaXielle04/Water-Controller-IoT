@@ -1,0 +1,730 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+
+    --background: #f4f7fb;
+
+    --card-background: #ffffff;
+
+    --text-primary: #172033;
+
+    --text-secondary: #687386;
+
+    --border: #e6eaf0;
+
+    --green: #19a974;
+
+    --green-light: #e8f8f1;
+
+    --red: #e05252;
+
+    --red-light: #fcecec;
+
+    --yellow: #d69b00;
+
+    --yellow-light: #fff7df;
+
+    --blue: #377dff;
+
+    --blue-light: #eaf1ff;
+
+    --shadow:
+        0 10px 30px rgba(27, 39, 63, 0.06);
+
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    font-family:
+
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: var(--background);
+
+    color: var(--text-primary);
+
+}
+
+
+.app-container {
+
+    width: min(100% - 32px, 1400px);
+
+    margin: 0 auto;
+
+    padding: 32px 0 48px;
+
+}
+
+
+.topbar {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 32px;
+
+}
+
+
+.eyebrow {
+
+    color: var(--blue);
+
+    font-size: 0.75rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    margin-bottom: 8px;
+
+}
+
+
+h1 {
+
+    font-size: clamp(1.8rem, 4vw, 3rem);
+
+    line-height: 1.1;
+
+}
+
+
+h2 {
+
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+
+}
+
+
+.connection-status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: var(--text-secondary);
+
+    font-size: 0.9rem;
+
+}
+
+
+.dashboard-grid {
+
+    display: grid;
+
+    grid-template-columns:
+
+        repeat(12, minmax(0, 1fr));
+
+    gap: 20px;
+
+}
+
+
+.card {
+
+    background: var(--card-background);
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    padding: clamp(20px, 3vw, 32px);
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.pump-card {
+
+    grid-column: span 6;
+
+}
+
+
+.sensor-card {
+
+    grid-column: span 6;
+
+}
+
+
+.device-card {
+
+    grid-column: span 5;
+
+}
+
+
+.overview-card {
+
+    grid-column: span 7;
+
+}
+
+
+.card-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 16px;
+
+    margin-bottom: 28px;
+
+}
+
+
+.card-label {
+
+    color: var(--text-secondary);
+
+    font-size: 0.7rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    margin-bottom: 6px;
+
+}
+
+
+.pump-icon,
+.sensor-icon,
+.device-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 14px;
+
+    font-size: 1.5rem;
+
+}
+
+
+.pump-icon {
+
+    background: var(--blue-light);
+
+}
+
+
+.sensor-icon {
+
+    background: var(--green-light);
+
+}
+
+
+.device-icon {
+
+    background: var(--yellow-light);
+
+}
+
+
+.status-dot {
+
+    display: inline-block;
+
+    width: 10px;
+
+    height: 10px;
+
+    border-radius: 50%;
+
+}
+
+
+.status-dot.online {
+
+    background: var(--green);
+
+    box-shadow:
+
+        0 0 0 5px var(--green-light);
+
+}
+
+
+.status-dot.offline {
+
+    background: var(--red);
+
+    box-shadow:
+
+        0 0 0 5px var(--red-light);
+
+}
+
+
+.status-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    font-size: 0.75rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+
+}
+
+
+.status-badge.on {
+
+    color: var(--green);
+
+    background: var(--green-light);
+
+}
+
+
+.status-badge.off {
+
+    color: var(--red);
+
+    background: var(--red-light);
+
+}
+
+
+.status-badge.full {
+
+    color: var(--green);
+
+    background: var(--green-light);
+
+}
+
+
+.status-badge.not-full {
+
+    color: var(--yellow);
+
+    background: var(--yellow-light);
+
+}
+
+
+.status-badge.unknown {
+
+    color: var(--text-secondary);
+
+    background: #eef1f5;
+
+}
+
+
+.pump-status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 28px;
+
+}
+
+
+.pump-status p,
+.water-status p {
+
+    color: var(--text-secondary);
+
+}
+
+
+.pump-controls {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+}
+
+
+.pump-button {
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 15px 20px;
+
+    font-size: 0.9rem;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+
+        transform 0.2s ease,
+
+        opacity 0.2s ease;
+
+}
+
+
+.pump-button:hover {
+
+    transform: translateY(-2px);
+
+}
+
+
+.pump-button:active {
+
+    transform: translateY(0);
+
+}
+
+
+.pump-button:disabled {
+
+    opacity: 0.45;
+
+    cursor: not-allowed;
+
+}
+
+
+.on-button {
+
+    color: white;
+
+    background: var(--green);
+
+}
+
+
+.off-button {
+
+    color: white;
+
+    background: var(--red);
+
+}
+
+
+.water-status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 28px;
+
+}
+
+
+.sensor-value {
+
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 12px;
+
+}
+
+
+.sensor-value span {
+
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+
+    font-weight: 800;
+
+    line-height: 1;
+
+}
+
+
+.sensor-value small {
+
+    color: var(--text-secondary);
+
+}
+
+
+.device-status-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    font-size: 1.1rem;
+
+    font-weight: 700;
+
+    margin-bottom: 20px;
+
+}
+
+
+.last-update {
+
+    color: var(--text-secondary);
+
+    font-size: 0.9rem;
+
+}
+
+
+.last-update strong {
+
+    color: var(--text-primary);
+
+}
+
+
+.overview-list {
+
+    display: grid;
+
+    grid-template-columns:
+
+        repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+
+}
+
+
+.overview-item {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 16px;
+
+    border-radius: 12px;
+
+    background: #f8f9fb;
+
+}
+
+
+.overview-item span {
+
+    color: var(--text-secondary);
+
+    font-size: 0.9rem;
+
+}
+
+
+.overview-item strong {
+
+    font-size: 0.9rem;
+
+}
+
+
+.notification {
+
+    position: fixed;
+
+    right: 24px;
+
+    bottom: 24px;
+
+    max-width:
+
+        min(360px, calc(100% - 48px));
+
+    padding: 14px 18px;
+
+    border-radius: 12px;
+
+    color: white;
+
+    background: var(--text-primary);
+
+    box-shadow: var(--shadow);
+
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    pointer-events: none;
+
+    transition:
+
+        opacity 0.25s ease,
+
+        transform 0.25s ease;
+
+}
+
+
+.notification.show {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+}
+
+
+@media (max-width: 900px) {
+
+    .pump-card,
+    .sensor-card,
+    .device-card,
+    .overview-card {
+
+        grid-column: span 6;
+
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .app-container {
+
+        width: min(100% - 24px, 1400px);
+
+        padding-top: 20px;
+
+    }
+
+
+    .topbar {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        margin-bottom: 24px;
+
+    }
+
+
+    .dashboard-grid {
+
+        gap: 14px;
+
+    }
+
+
+    .pump-card,
+    .sensor-card,
+    .device-card,
+    .overview-card {
+
+        grid-column: span 12;
+
+    }
+
+
+    .pump-controls {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .overview-list {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .card {
+
+        border-radius: 16px;
+
+    }
+
+}
+
+
+@media (max-width: 380px) {
+
+    .app-container {
+
+        width: min(100% - 16px, 1400px);
+
+    }
+
+
+    .card {
+
+        padding: 18px;
+
+    }
+
+
+    .pump-status,
+    .water-status {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+    }
+
+}

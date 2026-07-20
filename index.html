@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="theme-color" content="#1a4b6d">
+
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+    <title>Smart Water Pump</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="app-container">
+
+        <header class="topbar">
+
+            <div>
+                <p class="eyebrow">AUTOMATIC WATER PUMP</p>
+                <h1>Control Dashboard</h1>
+            </div>
+
+            <div class="connection-status">
+                <span id="connectionDot" class="status-dot offline"></span>
+                <span id="connectionText">Offline</span>
+            </div>
+
+        </header>
+
+
+        <section class="dashboard-grid">
+
+            <!-- Pump Control -->
+            <article class="card pump-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <p class="card-label">PUMP CONTROL</p>
+                        <h2>Water Pump</h2>
+                    </div>
+
+                    <div class="pump-icon">
+                        💧
+                    </div>
+
+                </div>
+
+
+                <div class="pump-status">
+
+                    <span id="pumpStateBadge" class="status-badge off">
+                        OFF
+                    </span>
+
+                    <p id="pumpStateText">
+                        Pump is currently off
+                    </p>
+
+                </div>
+
+
+                <div class="pump-controls">
+
+                    <button id="pumpOnButton"
+                            class="pump-button on-button">
+
+                        TURN ON
+
+                    </button>
+
+
+                    <button id="pumpOffButton"
+                            class="pump-button off-button">
+
+                        TURN OFF
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- Water Sensor -->
+            <article class="card sensor-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <p class="card-label">WATER SENSOR</p>
+                        <h2>Container Status</h2>
+                    </div>
+
+                    <div class="sensor-icon">
+                        🌊
+                    </div>
+
+                </div>
+
+
+                <div class="water-status">
+
+                    <div id="waterStatusBadge"
+                         class="status-badge unknown">
+
+                        UNKNOWN
+
+                    </div>
+
+
+                    <p id="waterStatusText">
+                        Waiting for sensor data...
+                    </p>
+
+                </div>
+
+
+                <div class="sensor-value">
+
+                    <span id="waterLevelValue">
+                        0
+                    </span>
+
+                    <small>
+                        Analog Value
+                    </small>
+
+                </div>
+
+            </article>
+
+
+            <!-- ESP32 Status -->
+            <article class="card device-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <p class="card-label">ESP32 DEVICE</p>
+                        <h2>Device Status</h2>
+                    </div>
+
+                    <div class="device-icon">
+                        ⚙️
+                    </div>
+
+                </div>
+
+
+                <div class="device-status-row">
+
+                    <span id="deviceStatusDot"
+                          class="status-dot offline">
+
+                    </span>
+
+
+                    <span id="deviceStatusText">
+                        Offline
+                    </span>
+
+                </div>
+
+
+                <p class="last-update">
+
+                    Last sensor update:
+
+                    <strong id="lastUpdate">
+                        Never
+                    </strong>
+
+                </p>
+
+            </article>
+
+
+            <!-- System Overview -->
+            <article class="card overview-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <p class="card-label">SYSTEM OVERVIEW</p>
+                        <h2>Current Status</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="overview-list">
+
+                    <div class="overview-item">
+
+                        <span>
+                            Pump Command
+                        </span>
+
+                        <strong id="commandStatus">
+                            OFF
+                        </strong>
+
+                    </div>
+
+
+                    <div class="overview-item">
+
+                        <span>
+                            Relay State
+                        </span>
+
+                        <strong id="relayStatus">
+                            OFF
+                        </strong>
+
+                    </div>
+
+
+                    <div class="overview-item">
+
+                        <span>
+                            Water Level
+                        </span>
+
+                        <strong id="overviewWaterLevel">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="overview-item">
+
+                        <span>
+                            Container
+                        </span>
+
+                        <strong id="overviewContainerStatus">
+                            UNKNOWN
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <div id="notification"
+             class="notification">
+
+            <span id="notificationText"></span>
+
+        </div>
+
+    </main>
+
+
+    <script type="module" src="app.js"></script>
+
+</body>
+</html>
