@@ -1,276 +1,516 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="manifest" href="manifest.json">
 
-    <meta name="theme-color" content="#1a4b6d">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="mobile-web-app-capable" content="yes">
+    <meta
+        name="description"
+        content="Control and monitor the automatic water pump system in real time."
+    >
 
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta
+        name="theme-color"
+        content="#1a4b6d"
+    >
 
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta
+        name="mobile-web-app-capable"
+        content="yes"
+    >
 
-    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes"
+    >
 
-    <title>Smart Water Pump</title>
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="default"
+    >
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="manifest"
+        href="/manifest.json"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="/icons/icon-192.png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+
+    <title>
+        Smart Water Pump
+    </title>
+
 </head>
+
 
 <body>
 
+
     <main class="app-container">
+
 
         <header class="topbar">
 
+
             <div>
-                <p class="eyebrow">AUTOMATIC WATER PUMP</p>
-                <h1>Control Dashboard</h1>
+
+                <p class="eyebrow">
+                    AUTOMATIC WATER PUMP
+                </p>
+
+
+                <h1>
+                    Control Dashboard
+                </h1>
+
             </div>
 
-            <div class="connection-status">
-                <span id="connectionDot" class="status-dot offline"></span>
-                <span id="connectionText">Offline</span>
+
+            <div
+                class="connection-status"
+                aria-label="Firebase connection status"
+            >
+
+                <span
+                    id="connectionDot"
+                    class="status-dot offline"
+                ></span>
+
+
+                <span
+                    id="connectionText"
+                >
+                    Offline
+                </span>
+
             </div>
+
+            <button
+                id="installButton"
+                class="install-button"
+                type="button"
+                style="display: none;"
+            >
+                INSTALL APP
+            </button>
+
 
         </header>
 
 
-        <section class="dashboard-grid">
+        <section
+            class="dashboard-grid"
+            aria-label="Water pump dashboard"
+        >
 
-            <!-- Pump Control -->
-            <article class="card pump-card">
+
+            <!-- =====================================
+                 PUMP CONTROL
+            ====================================== -->
+
+            <article
+                class="card pump-card"
+            >
+
 
                 <div class="card-header">
 
+
                     <div>
-                        <p class="card-label">PUMP CONTROL</p>
-                        <h2>Water Pump</h2>
+
+                        <p class="card-label">
+                            PUMP CONTROL
+                        </p>
+
+
+                        <h2>
+                            Water Pump
+                        </h2>
+
                     </div>
 
-                    <div class="pump-icon">
+
+                    <div
+                        class="pump-icon"
+                        aria-hidden="true"
+                    >
                         💧
                     </div>
+
 
                 </div>
 
 
                 <div class="pump-status">
 
-                    <span id="pumpStateBadge" class="status-badge off">
+
+                    <span
+                        id="pumpStateBadge"
+                        class="status-badge off"
+                    >
                         OFF
                     </span>
 
-                    <p id="pumpStateText">
+
+                    <p
+                        id="pumpStateText"
+                    >
                         Pump is currently off
                     </p>
+
 
                 </div>
 
 
                 <div class="pump-controls">
 
-                    <button id="pumpOnButton"
-                            class="pump-button on-button">
 
+                    <button
+                        id="pumpOnButton"
+                        class="pump-button on-button"
+                        type="button"
+                        aria-label="Turn water pump on"
+                    >
                         TURN ON
-
                     </button>
 
 
-                    <button id="pumpOffButton"
-                            class="pump-button off-button">
-
+                    <button
+                        id="pumpOffButton"
+                        class="pump-button off-button"
+                        type="button"
+                        aria-label="Turn water pump off"
+                    >
                         TURN OFF
-
                     </button>
+
 
                 </div>
+
 
             </article>
 
 
-            <!-- Water Sensor -->
-            <article class="card sensor-card">
+            <!-- =====================================
+                 WATER SENSOR
+            ====================================== -->
+
+            <article
+                class="card sensor-card"
+            >
+
 
                 <div class="card-header">
 
+
                     <div>
-                        <p class="card-label">WATER SENSOR</p>
-                        <h2>Container Status</h2>
+
+                        <p class="card-label">
+                            WATER SENSOR
+                        </p>
+
+
+                        <h2>
+                            Container Status
+                        </h2>
+
                     </div>
 
-                    <div class="sensor-icon">
+
+                    <div
+                        class="sensor-icon"
+                        aria-hidden="true"
+                    >
                         🌊
                     </div>
+
 
                 </div>
 
 
                 <div class="water-status">
 
-                    <div id="waterStatusBadge"
-                         class="status-badge unknown">
 
+                    <div
+                        id="waterStatusBadge"
+                        class="status-badge unknown"
+                    >
                         UNKNOWN
-
                     </div>
 
 
-                    <p id="waterStatusText">
+                    <p
+                        id="waterStatusText"
+                    >
                         Waiting for sensor data...
                     </p>
+
 
                 </div>
 
 
                 <div class="sensor-value">
 
-                    <span id="waterLevelValue">
+
+                    <span
+                        id="waterLevelValue"
+                    >
                         0
                     </span>
+
 
                     <small>
                         Analog Value
                     </small>
 
+
                 </div>
+
 
             </article>
 
 
-            <!-- ESP32 Status -->
-            <article class="card device-card">
+            <!-- =====================================
+                 ESP32 STATUS
+            ====================================== -->
+
+            <article
+                class="card device-card"
+            >
+
 
                 <div class="card-header">
 
+
                     <div>
-                        <p class="card-label">ESP32 DEVICE</p>
-                        <h2>Device Status</h2>
+
+                        <p class="card-label">
+                            ESP32 DEVICE
+                        </p>
+
+
+                        <h2>
+                            Device Status
+                        </h2>
+
                     </div>
 
-                    <div class="device-icon">
+
+                    <div
+                        class="device-icon"
+                        aria-hidden="true"
+                    >
                         ⚙️
                     </div>
 
+
                 </div>
 
 
-                <div class="device-status-row">
-
-                    <span id="deviceStatusDot"
-                          class="status-dot offline">
-
-                    </span>
+                <div
+                    class="device-status-row"
+                >
 
 
-                    <span id="deviceStatusText">
+                    <span
+                        id="deviceStatusDot"
+                        class="status-dot offline"
+                    ></span>
+
+
+                    <span
+                        id="deviceStatusText"
+                    >
                         Offline
                     </span>
 
+
                 </div>
 
 
-                <p class="last-update">
+                <p
+                    class="last-update"
+                >
 
                     Last sensor update:
 
-                    <strong id="lastUpdate">
+
+                    <strong
+                        id="lastUpdate"
+                    >
                         Never
                     </strong>
 
+
                 </p>
+
 
             </article>
 
 
-            <!-- System Overview -->
-            <article class="card overview-card">
+            <!-- =====================================
+                 SYSTEM OVERVIEW
+            ====================================== -->
 
-                <div class="card-header">
+            <article
+                class="card overview-card"
+            >
+
+
+                <div
+                    class="card-header"
+                >
+
 
                     <div>
-                        <p class="card-label">SYSTEM OVERVIEW</p>
-                        <h2>Current Status</h2>
+
+                        <p class="card-label">
+                            SYSTEM OVERVIEW
+                        </p>
+
+
+                        <h2>
+                            Current Status
+                        </h2>
+
                     </div>
+
 
                 </div>
 
 
-                <div class="overview-list">
+                <div
+                    class="overview-list"
+                >
 
-                    <div class="overview-item">
+
+                    <div
+                        class="overview-item"
+                    >
 
                         <span>
                             Pump Command
                         </span>
 
-                        <strong id="commandStatus">
+
+                        <strong
+                            id="commandStatus"
+                        >
                             OFF
                         </strong>
+
 
                     </div>
 
 
-                    <div class="overview-item">
+                    <div
+                        class="overview-item"
+                    >
 
                         <span>
                             Relay State
                         </span>
 
-                        <strong id="relayStatus">
+
+                        <strong
+                            id="relayStatus"
+                        >
                             OFF
                         </strong>
+
 
                     </div>
 
 
-                    <div class="overview-item">
+                    <div
+                        class="overview-item"
+                    >
 
                         <span>
                             Water Level
                         </span>
 
-                        <strong id="overviewWaterLevel">
+
+                        <strong
+                            id="overviewWaterLevel"
+                        >
                             0
                         </strong>
+
 
                     </div>
 
 
-                    <div class="overview-item">
+                    <div
+                        class="overview-item"
+                    >
 
                         <span>
                             Container
                         </span>
 
-                        <strong id="overviewContainerStatus">
+
+                        <strong
+                            id="overviewContainerStatus"
+                        >
                             UNKNOWN
                         </strong>
 
+
                     </div>
+
 
                 </div>
 
+
             </article>
+
 
         </section>
 
 
-        <div id="notification"
-             class="notification">
+        <!-- =====================================
+             NOTIFICATION
+        ====================================== -->
 
-            <span id="notificationText"></span>
+        <div
+            id="notification"
+            class="notification"
+            role="status"
+            aria-live="polite"
+        >
+
+            <span
+                id="notificationText"
+            ></span>
+
 
         </div>
+
 
     </main>
 
 
-    <script type="module" src="app.js"></script>
+    <script
+        type="module"
+        src="/app.js"
+    ></script>
+
 
 </body>
+
 </html>

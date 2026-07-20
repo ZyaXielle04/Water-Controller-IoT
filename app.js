@@ -2,11 +2,13 @@ import {
     initializeApp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
+
 import {
     getAuth,
     signInAnonymously,
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
 
 import {
     getDatabase,
@@ -220,6 +222,22 @@ const notificationText =
     document.getElementById(
         "notificationText"
     );
+
+
+// ==================================================
+// PWA INSTALL ELEMENT
+// ==================================================
+
+const installButton =
+    document.getElementById(
+        "installButton"
+    );
+
+
+// Stores the browser's installation prompt
+
+let deferredInstallPrompt =
+    null;
 
 
 // ==================================================
@@ -884,6 +902,259 @@ onAuthStateChanged(
     }
 
 );
+
+
+// ==================================================
+// PWA INSTALLATION
+// ==================================================
+
+// Capture the browser's install prompt
+
+window.addEventListener(
+
+    "beforeinstallprompt",
+
+    (
+
+        event
+
+    ) => {
+
+
+        console.log(
+
+            "PWA installation is available"
+
+        );
+
+
+        // Prevent the browser from showing
+        // its default automatic prompt
+
+        event.preventDefault();
+
+
+        // Save the event for later
+
+        deferredInstallPrompt =
+            event;
+
+
+        // Show our custom button
+
+        if (
+
+            installButton
+
+        ) {
+
+            installButton.style.display =
+                "block";
+
+        }
+
+    }
+
+);
+
+
+// ==================================================
+// INSTALL PWA BUTTON
+// ==================================================
+
+if (
+
+    installButton
+
+) {
+
+
+    installButton.addEventListener(
+
+        "click",
+
+        async () => {
+
+
+            if (
+
+                !deferredInstallPrompt
+
+            ) {
+
+
+                showNotification(
+
+                    "PWA installation is not available on this device"
+
+                );
+
+
+                return;
+
+            }
+
+
+            // Show native installation dialog
+
+            deferredInstallPrompt.prompt();
+
+
+            const choiceResult =
+
+                await deferredInstallPrompt.userChoice;
+
+
+            console.log(
+
+                "PWA installation result:",
+
+                choiceResult.outcome
+
+            );
+
+
+            if (
+
+                choiceResult.outcome ===
+                "accepted"
+
+            ) {
+
+
+                showNotification(
+
+                    "App installation started"
+
+                );
+
+            }
+
+            else {
+
+
+                showNotification(
+
+                    "App installation cancelled"
+
+                );
+
+            }
+
+
+            // The prompt can only be used once
+
+            deferredInstallPrompt =
+                null;
+
+
+            // Hide button after prompt
+
+            installButton.style.display =
+                "none";
+
+        }
+
+    );
+
+}
+
+
+// ==================================================
+// DETECT WHEN PWA IS INSTALLED
+// ==================================================
+
+window.addEventListener(
+
+    "appinstalled",
+
+    () => {
+
+
+        console.log(
+
+            "PWA installed successfully"
+
+        );
+
+
+        deferredInstallPrompt =
+            null;
+
+
+        if (
+
+            installButton
+
+        ) {
+
+            installButton.style.display =
+                "none";
+
+        }
+
+
+        showNotification(
+
+            "Smart Water Pump installed"
+
+        );
+
+    }
+
+);
+
+
+// ==================================================
+// DETECT STANDALONE MODE
+// ==================================================
+
+function isRunningAsInstalledPWA() {
+
+
+    return (
+
+        window.matchMedia(
+
+            "(display-mode: standalone)"
+
+        ).matches
+
+        ||
+
+        window.navigator.standalone === true
+
+    );
+
+}
+
+
+if (
+
+    isRunningAsInstalledPWA()
+
+) {
+
+
+    console.log(
+
+        "Running as installed PWA"
+
+    );
+
+
+    if (
+
+        installButton
+
+    ) {
+
+        installButton.style.display =
+            "none";
+
+    }
+
+}
 
 
 // ==================================================

@@ -728,3 +728,23 @@ h2 {
     }
 
 }
+
+.install-button {
+    border: none;
+    border-radius: 12px;
+    padding: 12px 18px;
+    color: white;
+    background: var(--blue);
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.install-button:hover {
+    transform: translateY(-2px);
+}
+
+.install-button:active {
+    transform: translateY(0);
+}
